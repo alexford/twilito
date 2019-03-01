@@ -1,0 +1,26 @@
+AllCops:
+  Exclude:
+    - "bin/**/*"
+    - "twilito.gemspec"
+
+Metrics/BlockLength:
+  Exclude:
+    - "test/**/*"
+    - "config/environments/*"
+    - "config/application.rb"
+    - "config/routes.rb"
+
+Metrics/LineLength:
+  Exclude:
+    - "config/environments/*"
+    - "config/application.rb"
+
+Style/StringLiterals:
+  Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+  IndentationWidth: 2
+
+Style/Documentation:
+  Enabled: false
