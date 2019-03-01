@@ -44,7 +44,7 @@ result.response # => Raw API Response
 Twilito.send!(
   to: '+15555555555',
   from: '+12333',
-  content: 'This is my content',
+  body: 'This is my content',
   account_sid: '...',
   auth_token: '...'
 ) # => raises Twilito::RestError with message
@@ -55,7 +55,7 @@ Twilito.send!(
 ```ruby
 # In an initializer or something like that:
 
-Twilito.config do |config|
+Twilito.configure do |config|
   # Store your secrets elsewhere
   config.account_sid = ENV['TWILIO_ACCOUNT_SID']
   config.auth_token = ENV['TWILIO_AUTH_TOKEN']
@@ -67,7 +67,7 @@ end
 ```ruby
 # Later, in your code:
 
-Twilito.send!(to: '+15555555555', content: 'Foo')
+Twilito.send!(to: '+15555555555', body: 'Foo')
 ```
 
 #### Really, everything
@@ -75,14 +75,14 @@ Twilito.send!(to: '+15555555555', content: 'Foo')
 ```ruby
 # In an initializer or something like that:
 
-Twilito.config do |config|
+Twilito.configure do |config|
   # Store your secrets elsewhere
   config.account_sid = ENV['TWILIO_ACCOUNT_SID']
   config.auth_token = ENV['TWILIO_AUTH_TOKEN']
 
   config.from = '+16145555555'
   config.to = '+15555555555'
-  config.content = 'A new user signed up'
+  config.body = 'A new user signed up'
 end
 ```
 
