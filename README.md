@@ -1,5 +1,7 @@
 # Twilito
 
+[![Build Status](https://travis-ci.org/alexford/twilito.svg?branch=master)](https://travis-ci.org/alexford/twilito)
+
 A tiny, zero dependency helper for sending text messages with Twilio
 
 ## Why
