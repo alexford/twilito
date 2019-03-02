@@ -22,7 +22,7 @@ gem 'twilito'
 
 ```ruby
 # All options are required (but can be defaulted, see below)
-result = Twilito.send(
+result = Twilito.send_sms(
   to: '+15555555555',
   from: '+15554444444',
   content: 'This is my content'
@@ -41,7 +41,7 @@ result.response # => Raw API Response
 #### Use send! to raise on error instead
 
 ```ruby
-Twilito.send!(
+Twilito.send_sms!(
   to: '+15555555555',
   from: '+12333',
   body: 'This is my content',
@@ -67,7 +67,7 @@ end
 ```ruby
 # Later, in your code:
 
-Twilito.send!(to: '+15555555555', body: 'Foo')
+Twilito.send_sms!(to: '+15555555555', body: 'Foo')
 ```
 
 #### Really, everything
@@ -89,7 +89,7 @@ end
 ```ruby
 # Later, in your code:
 
-Twilito.send!
+Twilito.send_sms!
 ```
 
 ## Testing your code
