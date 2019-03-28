@@ -2,18 +2,24 @@
 
 require "twilito/version"
 require "twilito/configuration"
+require "twilito/result"
 
 module Twilito
   class ArgumentError < StandardError; end
+  class SendError < StandardError; end
 
   class << self
     def send_sms(**args)
       send_sms!(args)
+      # TODO: return struct
+    rescue SendError => e
+      Result.new(success?: false, errors: [e.message])
     end
 
     def send_sms!(**args)
       _args = merge_configuration!(args)
-      # TODO: Do something
+
+      raise SendError, 'Not implemented'
     end
 
     private

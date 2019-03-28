@@ -9,6 +9,10 @@ module Twilito
     @configuration ||= Configuration.new
   end
 
+  def self.reset_configuration!
+    @configuration = Configuration.new
+  end
+
   class Configuration
     attr_accessor :account_sid, :auth_token, :from, :to, :body
 
