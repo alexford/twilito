@@ -14,7 +14,11 @@ module Twilito
   end
 
   class Configuration
-    attr_accessor :account_sid, :auth_token, :from, :to, :body
+    attr_accessor :account_sid, :auth_token, :from, :to, :body,
+                  :twilio_host, :twilio_version
+
+    TWILIO_HOST = 'api.twilio.com'
+    TWILIO_VERSION = '2010-04-01'
 
     def to_h
       {
