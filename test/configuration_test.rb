@@ -18,13 +18,13 @@ describe Twilito do
   it "does not require arguments for .send_sms once configured as defaults" do
     Twilito.configure do |config|
       config.body = 'foo'
-
-      error = assert_raises Twilito::ArgumentError do
-        Twilito.send_sms
-      end
-
-      assert_match "to, from, account_sid, auth_token", error.message
     end
+
+    error = assert_raises Twilito::ArgumentError do
+      Twilito.send_sms
+    end
+
+    assert_match "to, from, account_sid, auth_token", error.message
   end
 
   it "does not require any arguments for .send_sms if they're all configured" do
