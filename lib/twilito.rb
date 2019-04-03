@@ -30,9 +30,7 @@ module Twilito
 
     def merge_configuration!(**args)
       configuration.to_h.merge(args).tap do |merged|
-        missing_keys = merged.map do |k, v|
-          v.nil? ? k : nil
-        end.compact
+        missing_keys = merged.select { |_k, v| v.nil? }.keys
 
         if missing_keys.any?
           raise ArgumentError, "Missing argument(s): #{missing_keys.join(', ')}"
