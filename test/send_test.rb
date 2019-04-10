@@ -31,6 +31,9 @@ describe Twilito do
       it 'POSTs to Twilio API with correct body' do
         Twilito.send_sms
 
+        # TODO: test auth
+        # TODO: unit tests for Result?
+
         assert_requested(
           :post, 'https://api.twilio.com/2010-04-01/Accounts/ACSID/Messages.json',
           body: {
