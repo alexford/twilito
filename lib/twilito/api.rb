@@ -14,16 +14,6 @@ module Twilito
       end
     end
 
-    private
-
-    def twilio_params(args)
-      {
-        'To' => args[:to],
-        'From' => args[:from],
-        'Body' => args[:body]
-      }
-    end
-
     def messages_uri(args)
       components = [
         Configuration::TWILIO_VERSION,
@@ -36,6 +26,16 @@ module Twilito
         host: Configuration::TWILIO_HOST,
         path: '/' + components.join('/')
       )
+    end
+
+    private
+
+    def twilio_params(args)
+      {
+        'To' => args[:to],
+        'From' => args[:from],
+        'Body' => args[:body]
+      }
     end
   end
 end

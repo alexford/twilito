@@ -3,7 +3,7 @@
 require "test_helper"
 
 describe Twilito do
-  def setup
+  before do
     Twilito.configure do |config|
       config.to = '+16145555555'
       config.from = '+16143333333'
@@ -14,27 +14,79 @@ describe Twilito do
   end
 
   describe '.send_sms' do
-    it "returns a Twilito::Result" do
-      assert_instance_of Twilito::Result, Twilito.send_sms
+    describe 'with a successful response from Twilio' do
+      before do
+        stub_send_request(response_body: { sid: 'some_sid' })
+      end
+
+      it 'returns a successful Twilito::Result' do
+        result = Twilito.send_sms
+
+        assert_instance_of Twilito::Result, result
+        assert_equal 'some_sid', result.sid
+        assert_equal true, result.success?
+        assert_equal [], result.errors
+      end
+
+      it 'POSTs to Twilio API with correct body' do
+        Twilito.send_sms
+
+        assert_requested(
+          :post, 'https://api.twilio.com/2010-04-01/Accounts/ACSID/Messages.json',
+          body: {
+            To: '+16145555555',
+            From: '+16143333333',
+            Body: 'This is the body'
+          }
+        )
+      end
+
+      describe 'with options passed' do
+        it 'POSTs to Twilio API with correct body, overriding configuration' do
+          Twilito.send_sms(body: 'A different body', to: '+17405555555')
+
+          assert_requested(
+            :post, 'https://api.twilio.com/2010-04-01/Accounts/ACSID/Messages.json',
+            body: {
+              To: '+17405555555',
+              From: '+16143333333',
+              Body: 'A different body'
+            }
+          )
+        end
+      end
     end
 
-    it "has errors because sending is not implemented" do
-      result = Twilito.send_sms
+    describe 'with an unsuccessful response from Twilio' do
+      before do
+        stub_send_request(status: 500, response_body: 'oh no')
+        @result = Twilito.send_sms
+      end
 
-      assert_equal false, result.success?
-      assert_equal ["Not implemented"], result.errors
-      assert_nil result.sid
-      assert_nil result.response
+      it 'returns an unsuccessful Twilito::Result' do
+        assert_instance_of Twilito::Result, @result
+        assert_nil @result.sid
+        assert_equal false, @result.success?
+        assert_equal ['Error from Twilio API'], @result.errors
+        assert_equal 'oh no', @result.response.read_body
+      end
     end
   end
 
   describe '.send_sms!' do
-    it "raises an error because sending is not implemented" do
-      error = assert_raises Twilito::SendError do
-        Twilito.send_sms!
+    describe 'with an unsuccessful response from Twilio' do
+      before do
+        stub_send_request(status: 500, response_body: 'oh no')
       end
 
-      assert_equal "Not implemented", error.message
+      it 'raises a Twilito::SendError' do
+        error = assert_raises Twilito::SendError do
+          Twilito.send_sms!
+        end
+
+        assert_equal 'Error from Twilio API', error.message
+        assert_equal 'oh no', error.response.read_body
+      end
     end
   end
 end

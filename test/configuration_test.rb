@@ -3,8 +3,9 @@
 require "test_helper"
 
 describe Twilito do
-  def setup
+  before do
     Twilito.reset_configuration!
+    stub_request(:post, /api.twilio.com/)
   end
 
   it "requires all arguments for .send_sms" do

@@ -37,19 +37,25 @@ result = Twilito.send_sms(
 result.success? # => boolean
 result.errors # => [] or error messages
 result.sid #=> Twilio SID for Message (SM[...])
-result.response # => Raw API Response
+result.response # => Raw response (instance of Net::HTTPResponse)
+result.data # => Hash of response data (parsed from JSON)
 ```
 
 #### Use send! to raise on error instead
 
 ```ruby
-Twilito.send_sms!(
-  to: '+15555555555',
-  from: '+12333',
-  body: 'This is my content',
-  account_sid: '...',
-  auth_token: '...'
-) # => raises Twilito::RestError with message
+begin
+  Twilito.send_sms!(
+    to: '+15555555555',
+    from: '+12333',
+    body: 'This is my content',
+    account_sid: '...',
+    auth_token: '...'
+  )
+rescue Twilito::SendError => e
+  e.message # => 'Error from Twilio API'
+  e.response # => Raw response (instance of Net::HTTPResponse)
+end
 ```
 
 #### Every argument can be defaulted
