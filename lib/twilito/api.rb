@@ -3,7 +3,7 @@
 module Twilito
   module API
     def send_response(args)
-      uri = messages_uri(args)
+      uri = messages_uri(args[:account_sid])
 
       Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
         req = Net::HTTP::Post.new(uri)
@@ -14,11 +14,11 @@ module Twilito
       end
     end
 
-    def messages_uri(args)
+    def messages_uri(account_sid)
       components = [
         Configuration::TWILIO_VERSION,
         'Accounts',
-        args[:account_sid],
+        account_sid,
         'Messages.json'
       ]
 
