@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    Twilito (0.1.0)
+    twilito (0.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -29,11 +29,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  Twilito!
   bundler (~> 2.0)
   minitest (~> 5.11)
   pry
   rake (~> 10.0)
+  twilito!
   webmock (~> 3)
 
 RUBY VERSION
