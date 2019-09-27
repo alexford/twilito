@@ -1,5 +1,7 @@
 # Twilito
 
+[![Build Status](https://travis-ci.org/alexford/twilito.svg?branch=master)](https://travis-ci.org/alexford/twilito)
+
 A tiny, zero dependency helper for sending text messages with Twilio
 
 ## Why
@@ -22,7 +24,7 @@ gem 'twilito'
 
 ```ruby
 # All options are required (but can be defaulted, see below)
-result = Twilito.send(
+result = Twilito.send_sms(
   to: '+15555555555',
   from: '+15554444444',
   content: 'This is my content'
@@ -35,19 +37,25 @@ result = Twilito.send(
 result.success? # => boolean
 result.errors # => [] or error messages
 result.sid #=> Twilio SID for Message (SM[...])
-result.response # => Raw API Response
+result.response # => Raw response (instance of Net::HTTPResponse)
+result.data # => Hash of response data (parsed from JSON)
 ```
 
 #### Use send! to raise on error instead
 
 ```ruby
-Twilito.send!(
-  to: '+15555555555',
-  from: '+12333',
-  content: 'This is my content',
-  account_sid: '...',
-  auth_token: '...'
-) # => raises Twilito::RestError with message
+begin
+  Twilito.send_sms!(
+    to: '+15555555555',
+    from: '+12333',
+    body: 'This is my content',
+    account_sid: '...',
+    auth_token: '...'
+  )
+rescue Twilito::SendError => e
+  e.message # => 'Error from Twilio API'
+  e.response # => Raw response (instance of Net::HTTPResponse)
+end
 ```
 
 #### Every argument can be defaulted
@@ -55,7 +63,7 @@ Twilito.send!(
 ```ruby
 # In an initializer or something like that:
 
-Twilito.config do |config|
+Twilito.configure do |config|
   # Store your secrets elsewhere
   config.account_sid = ENV['TWILIO_ACCOUNT_SID']
   config.auth_token = ENV['TWILIO_AUTH_TOKEN']
@@ -67,7 +75,7 @@ end
 ```ruby
 # Later, in your code:
 
-Twilito.send!(to: '+15555555555', content: 'Foo')
+Twilito.send_sms!(to: '+15555555555', body: 'Foo')
 ```
 
 #### Really, everything
@@ -75,21 +83,21 @@ Twilito.send!(to: '+15555555555', content: 'Foo')
 ```ruby
 # In an initializer or something like that:
 
-Twilito.config do |config|
+Twilito.configure do |config|
   # Store your secrets elsewhere
   config.account_sid = ENV['TWILIO_ACCOUNT_SID']
   config.auth_token = ENV['TWILIO_AUTH_TOKEN']
 
   config.from = '+16145555555'
   config.to = '+15555555555'
-  config.content = 'A new user signed up'
+  config.body = 'A new user signed up'
 end
 ```
 
 ```ruby
 # Later, in your code:
 
-Twilito.send!
+Twilito.send_sms!
 ```
 
 ## Testing your code
