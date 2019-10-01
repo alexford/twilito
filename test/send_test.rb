@@ -42,7 +42,7 @@ describe Twilito do
             Body: 'This is the body'
           },
           headers: {
-            'User-Agent' => "Ruby Twilito #{Twilito::VERSION}"
+            'User-Agent' => "Ruby Twilito/#{Twilito::VERSION}"
           }
         )
       end
