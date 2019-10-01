@@ -7,6 +7,7 @@ module Twilito
 
       Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
         req = Net::HTTP::Post.new(uri)
+        req.initialize_http_header({ 'User-Agent' => "Ruby Twilito/#{Twilito::VERSION}" })
         req.basic_auth(args[:account_sid], args[:auth_token])
         req.set_form_data(twilio_params(args))
 
