@@ -40,6 +40,9 @@ describe Twilito do
             To: '+16145555555',
             From: '+16143333333',
             Body: 'This is the body'
+          },
+          headers: {
+            'User-Agent' => "Ruby Twilito/#{Twilito::VERSION}"
           }
         )
       end
