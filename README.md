@@ -2,15 +2,17 @@
 
 [![Build Status](https://travis-ci.org/alexford/twilito.svg?branch=master)](https://travis-ci.org/alexford/twilito)
 
-A tiny, zero dependency helper for sending text messages with Twilio
+A tiny, zero dependency helper for sending text messages with Twilio. Just enough of a wrapper to abstract away Twilio's REST API for sending messages, without *anything* else.
 
 ## Why
 
-Twilio's full on Ruby library does a lot, and has a large memory footprint—too large for just sending an SMS. It's also more difficult to mock and verify than I'd like for a simple task like sending an individual SMS.
+Twilio's [full Ruby library](https://github.com/twilio/twilio-ruby) full Ruby library does a *lot*, and has a large memory footprint to go with it—too large for just sending a message. It's also more difficult to mock and verify in tests than I'd like.
 
-Using Twilio's REST API directly is fine, but can be cumbersome.
+Using [Twilio's REST API](https://www.twilio.com/docs/usage/api) directly is fine, but can be cumbersome.
 
-Twilito is just enough of a wrapper to abstract away the REST API without loading the rest of the Twilio ecosystem.
+You should consider using Twilito if the only thing you need to do is send text messages and you don't want to worry about making HTTP requests to Twilio yourself.
+
+If you use more of Twilio, consider [twilio-ruby](https://github.com/twilio/twilio-ruby) or interact with the REST API in another way.
 
 ## Usage
 
@@ -41,7 +43,7 @@ result.response # => Raw response (instance of Net::HTTPResponse)
 result.data # => Hash of response data (parsed from JSON)
 ```
 
-#### Use send! to raise on error instead
+#### Use send_sms! to raise on error instead
 
 ```ruby
 begin
@@ -78,27 +80,7 @@ end
 Twilito.send_sms!(to: '+15555555555', body: 'Foo')
 ```
 
-#### Really, everything
-
-```ruby
-# In an initializer or something like that:
-
-Twilito.configure do |config|
-  # Store your secrets elsewhere
-  config.account_sid = ENV['TWILIO_ACCOUNT_SID']
-  config.auth_token = ENV['TWILIO_AUTH_TOKEN']
-
-  config.from = '+16145555555'
-  config.to = '+15555555555'
-  config.body = 'A new user signed up'
-end
-```
-
-```ruby
-# Later, in your code:
-
-Twilito.send_sms!
-```
+**Everything can be defaulted, including the message body, so that a bare `Twilio.send_sms!` can work in your code**
 
 ## Testing your code
 
