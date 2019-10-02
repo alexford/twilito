@@ -6,7 +6,7 @@ A tiny, zero dependency helper for sending text messages with Twilio. Just enoug
 
 ## Why
 
-Twilio's [full Ruby library](https://github.com/twilio/twilio-ruby) full Ruby library does a *lot*, and has a large memory footprint to go with it—too large for just sending a message. It's also more difficult to mock and verify in tests than I'd like.
+Twilio's [full Ruby library](https://github.com/twilio/twilio-ruby) does a *lot*, and has a large memory footprint to go with it—too large for just sending a message. It's also more difficult to mock and verify in tests than I'd like.
 
 Using [Twilio's REST API](https://www.twilio.com/docs/usage/api) directly is fine, but can be cumbersome.
 
