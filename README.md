@@ -1,8 +1,8 @@
 # Twilito
 
-[![Build Status](https://travis-ci.org/alexford/twilito.svg?branch=master)](https://travis-ci.org/alexford/twilito)
-
 A tiny, zero dependency helper for sending text messages with Twilio. Just enough of a wrapper to abstract away Twilio's REST API for sending messages, without *anything* else.
+
+[![Gem Version](https://badge.fury.io/rb/twilito.svg)](https://badge.fury.io/rb/twilito) [![Actions Status](https://github.com/alexford/twilito/workflows/CI/badge.svg)](https://github.com/alexford/twilito/actions)
 
 ## Why
 
