@@ -10,6 +10,7 @@ Gem::Specification.new do |spec|
   spec.version       = Twilito::VERSION
   spec.authors       = ["Alex Ford"]
   spec.email         = ["alexford87@me.com"]
+  spec.required_ruby_version = '>= 2.4.0'
 
   spec.summary       = "A tiny, zero dependency, and easy to test helper for sending text messages with Twilio"
   spec.homepage      = "https://github.com/alexford/twilito"
