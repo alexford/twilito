@@ -16,6 +16,8 @@ If you use more of Twilio, consider [twilio-ruby](https://github.com/twilio/twil
 
 ## Usage
 
+Twilito should work on Ruby 2.4 and up.
+
 #### Install the gem
 
 ```
