@@ -13,7 +13,7 @@ module Twilito
     include API
 
     def send_sms(**args)
-      response = send_sms!(args)
+      response = send_sms!(**args)
       Result.success(
         response: response,
         sid: JSON.parse(response.read_body)['sid']
@@ -36,7 +36,7 @@ module Twilito
 
     private
 
-    def merge_configuration(**args)
+    def merge_configuration(args)
       configuration.to_h.merge(args).tap do |merged|
         missing_keys = merged.select { |_k, v| v.nil? }.keys
 
