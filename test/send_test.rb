@@ -61,6 +61,24 @@ describe Twilito do
           )
         end
       end
+
+      describe 'with media_url passed' do
+        it 'POSTs to Twilio API with correct body, overriding configuration' do
+          Twilito.send_sms(
+            body: 'A media SMS', to: '+17408675309', media_url: 'https://demo.twilio.com/owl.png'
+          )
+
+          assert_requested(
+            :post, 'https://api.twilio.com/2010-04-01/Accounts/ACSID/Messages.json',
+            body: {
+              To: '+17408675309',
+              From: '+16143333333',
+              Body: 'A media SMS',
+              MediaUrl: 'https://demo.twilio.com/owl.png'
+            }
+          )
+        end
+      end
     end
 
     describe 'with an unsuccessful response from Twilio' do
