@@ -35,8 +35,9 @@ module Twilito
       {
         'To' => args[:to],
         'From' => args[:from],
-        'Body' => args[:body]
-      }
+        'Body' => args[:body],
+        'MediaUrl' => args[:media_url]
+      }.compact
     end
 
     def user_agent
