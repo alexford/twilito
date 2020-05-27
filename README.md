@@ -1,12 +1,12 @@
 # Twilito
 
-A tiny, zero dependency helper for sending text messages with Twilio. Just enough of a wrapper to abstract away Twilio's REST API for sending messages, without *anything* else.
+A tiny, zero dependency helper for sending text messages with Twilio. Just enough of a wrapper to abstract away Twilio's REST API for sending messages, without _anything_ else.
 
 [![Gem Version](https://badge.fury.io/rb/twilito.svg)](https://badge.fury.io/rb/twilito) [![Actions Status](https://github.com/alexford/twilito/workflows/CI/badge.svg)](https://github.com/alexford/twilito/actions)
 
 ## Why
 
-Twilio's [full Ruby library](https://github.com/twilio/twilio-ruby) does a *lot*, and has a large memory footprint to go with it—too large for just sending a message. It's also more difficult to mock and verify in tests than I'd like.
+Twilio's [full Ruby library](https://github.com/twilio/twilio-ruby) does a _lot_, and has a large memory footprint to go with it—too large for just sending a message. It's also more difficult to mock and verify in tests than I'd like.
 
 Using [Twilio's REST API](https://www.twilio.com/docs/usage/api) directly is fine, but can be cumbersome.
 
@@ -27,14 +27,15 @@ gem 'twilito'
 #### Simplest case
 
 ```ruby
-# All options are required (but can be defaulted, see below)
+# All of these arguments are required, but can be defaulted (see below)
 result = Twilito.send_sms(
   to: '+15555555555',
   from: '+15554444444',
-  content: 'This is my content'
+  content: 'This is my content',
   account_sid: '...', # Twilio Credentials
   auth_token: '...'
 )
+
 
 # Returns Twilito::Result struct
 
@@ -83,6 +84,20 @@ Twilito.send_sms!(to: '+15555555555', body: 'Foo')
 ```
 
 **Everything can be defaulted, including the message body, so that a bare `Twilio.send_sms!` can work in your code**
+
+#### Sending MMS
+
+```ruby
+# Use the optional media_url argument, which is sent
+# to Twilio as MediaUrl
+
+result = Twilito.send_sms(
+  to: '+15555555555',
+  content: 'This is my content',
+  media_url: 'https://example.com/image.png',
+)
+
+```
 
 ## Testing your code
 
