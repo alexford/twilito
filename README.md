@@ -124,4 +124,4 @@ _TODO: Add examples of mocking and/or test helpers for asserting your code sends
 
 Did Twilito save you some RAM?
 
-<a href="https://www.buymeacoffee.com/alexford" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/lato-white.png" alt="Buy Me A Beer" style="height: 51px !important;width: 217px !important;" ></a>
+<a href="https://www.buymeacoffee.com/alexford" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/lato-white.png" alt="Buy Me A Beer" height="51" width="217" style="height: 51px !important;width: 217px !important;" ></a>
