@@ -105,4 +105,23 @@ _TODO: Add examples of mocking and/or test helpers for asserting your code sends
 
 ## Contributing
 
-_TODO_
+### Contribute Feedback, Ideas, and Bug Reports
+
+- Create or comment on an issue
+
+### Contribute Code
+
+- Find an open issue or create one
+- Fork this repo and open a PR
+- Write unit tests for your change
+
+### Contribute Docs
+
+- Open a PR to make the README better, or help with contribution guidelines, etc.
+- There is currently an open issue for adding RDoc/YARD documentation
+
+### Contribute Beer
+
+Did Twilito save you some RAM?
+
+<a href="https://www.buymeacoffee.com/alexford" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/lato-white.png" alt="Buy Me A Beer" style="height: 51px !important;width: 217px !important;" ></a>
