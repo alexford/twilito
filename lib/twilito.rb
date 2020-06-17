@@ -28,9 +28,7 @@ module Twilito
       args = merge_configuration(args)
 
       send_response(args).tap do |response|
-        unless response.is_a? Net::HTTPSuccess
-          raise SendError.new('Error from Twilio API', response)
-        end
+        raise SendError.new('Error from Twilio API', response) unless response.is_a? Net::HTTPSuccess
       end
     end
 
@@ -40,9 +38,7 @@ module Twilito
       configuration.to_h.merge(args).tap do |merged|
         missing_keys = merged.select { |_k, v| v.nil? }.keys
 
-        if missing_keys.any?
-          raise ArgumentError, "Missing argument(s): #{missing_keys.join(', ')}"
-        end
+        raise ArgumentError, "Missing argument(s): #{missing_keys.join(', ')}" if missing_keys.any?
       end
     end
   end
