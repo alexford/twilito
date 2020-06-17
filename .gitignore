@@ -2,8 +2,8 @@
 /.yardoc
 /_yardoc/
 /coverage/
-/doc/
 /pkg/
 /tmp/
 
 .ruby-version
+.DS_Store
