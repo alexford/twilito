@@ -1,17 +1,22 @@
 # frozen_string_literal: true
 
 module Twilito
-  Result = Struct.new(:success, :errors, :sid, :response) do
+  class Result
+    attr_reader :success, :errors, :sid, :response
+
     def initialize(success:, errors: [], sid: nil, response: nil)
-      super(success, errors, sid, response)
+      @success = success
+      @errors = errors
+      @sid = sid
+      @response = response
     end
 
-    def self.success(**args)
-      new(success: true, **args)
+    def self.success(response:, sid:)
+      new(success: true, response: response, sid: sid)
     end
 
-    def self.failure(**args)
-      new(success: false, **args)
+    def self.failure(response:, errors:)
+      new(success: false, response: response, errors: errors)
     end
 
     def data
@@ -19,15 +24,15 @@ module Twilito
     end
 
     def success?
-      to_h[:success] || false
+      success || false
     end
 
     private
 
     def response_body
-      return nil unless to_h[:response]&.respond_to?(:read_body)
+      return nil unless response&.respond_to?(:read_body)
 
-      to_h[:response].read_body
+      response.read_body
     end
   end
 end
