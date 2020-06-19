@@ -37,7 +37,7 @@ result = Twilito.send_sms(
 )
 
 
-# Returns Twilito::Result struct
+# Returns instance of Twilito::Result
 
 result.success? # => boolean
 result.errors # => [] or error messages
