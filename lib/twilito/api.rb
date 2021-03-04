@@ -36,7 +36,8 @@ module Twilito
         'To' => args[:to],
         'From' => args[:from],
         'Body' => args[:body],
-        'MediaUrl' => args[:media_url]
+        'MediaUrl' => args[:media_url],
+        'StatusCallback' => args[:status_callback]
       }.compact
     end
 

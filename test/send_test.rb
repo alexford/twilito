@@ -79,6 +79,22 @@ describe Twilito do
           )
         end
       end
+
+      describe 'with optional parameter passed' do
+        it 'POSTs to Twilio API with optional parameters' do
+          Twilito.send_sms(status_callback: 'https://abc1234.free.beeceptor.com')
+
+          assert_requested(
+            :post, 'https://api.twilio.com/2010-04-01/Accounts/ACSID/Messages.json',
+            body: {
+              To: '+16145555555',
+              From: '+16143333333',
+              Body: 'This is the body',
+              StatusCallback: 'https://abc1234.free.beeceptor.com'
+            }
+          )
+        end
+      end
     end
 
     describe 'with an unsuccessful response from Twilio' do
