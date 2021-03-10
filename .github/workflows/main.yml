@@ -7,17 +7,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby: [ '2.4.x', '2.5.x', '2.6.x', '2.7.x' ]
+        ruby: ["2.4.x", "2.5.x", "2.6.x", "2.7.x"]
     name: Run Tests (Ruby ${{ matrix.ruby }})
     steps:
       - uses: actions/checkout@master
       - name: Setup ruby
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
       - name: Run tests
-        run: |
-          gem install bundler
-          bundle
-          rake
-
+        run: rake
