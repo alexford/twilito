@@ -99,6 +99,20 @@ result = Twilito.send_sms(
 
 ```
 
+#### Set the optional `callback_url` argument if you want to receive HTTP callbacks from Twilio
+
+```ruby
+# Use the optional media_url argument, which is sent
+# to Twilio as MediaUrl
+
+result = Twilito.send_sms(
+  to: '+15555555555',
+  content: 'This is my content',
+  status_callback: 'https://your.app.io/sms/callback',
+)
+
+```
+
 ## Testing your code
 
 _TODO: Add examples of mocking and/or test helpers for asserting your code sends an SMS_
