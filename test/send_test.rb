@@ -82,7 +82,20 @@ describe Twilito do
 
       describe 'with optional parameter passed' do
         it 'POSTs to Twilio API with optional parameters' do
-          Twilito.send_sms(status_callback: 'https://abc1234.free.beeceptor.com')
+          Twilito.send_sms(
+            status_callback: 'https://abc1234.free.beeceptor.com',
+            application_sid: 'APXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+            max_price: '99.00',
+            provide_feedback: true,
+            attempt: 1,
+            validity_period: 14_400,
+            force_delivery: false,
+            content_retention: 'retain',
+            address_retention: 'retain',
+            smart_encoded: true,
+            persistent_action: 'geo:37.787890,-122.391664|375 Beale St',
+            messaging_service_sid: 'MGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+          )
 
           assert_requested(
             :post, 'https://api.twilio.com/2010-04-01/Accounts/ACSID/Messages.json',
@@ -90,7 +103,18 @@ describe Twilito do
               To: '+16145555555',
               From: '+16143333333',
               Body: 'This is the body',
-              StatusCallback: 'https://abc1234.free.beeceptor.com'
+              StatusCallback: 'https://abc1234.free.beeceptor.com',
+              ApplicationSid: 'APXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+              MaxPrice: '99.00',
+              ProvideFeedback: 'true',
+              Attempt: '1',
+              ValidityPeriod: '14400',
+              ForceDelivery: 'false',
+              ContentRetention: 'retain',
+              AddressRetention: 'retain',
+              SmartEncoded: 'true',
+              PersistentAction: 'geo:37.787890,-122.391664|375 Beale St',
+              MessagingServiceSid: 'MGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
             }
           )
         end

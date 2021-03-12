@@ -37,7 +37,18 @@ module Twilito
         'From' => args[:from],
         'Body' => args[:body],
         'MediaUrl' => args[:media_url],
-        'StatusCallback' => args[:status_callback]
+        'StatusCallback' => args[:status_callback],
+        'ApplicationSid' => args[:application_sid],
+        'MaxPrice' => args[:max_price],
+        'ProvideFeedback' => args[:provide_feedback],
+        'Attempt' => args[:attempt],
+        'ValidityPeriod' => args[:validity_period],
+        'ForceDelivery' => args[:force_delivery],
+        'ContentRetention' => args[:content_retention],
+        'AddressRetention' => args[:address_retention],
+        'SmartEncoded' => args[:smart_encoded],
+        'PersistentAction' => args[:persistent_action],
+        'MessagingServiceSid' => args[:messaging_service_sid]
       }.compact
     end
 
