@@ -31,7 +31,7 @@ gem 'twilito'
 result = Twilito.send_sms(
   to: '+15555555555',
   from: '+15554444444',
-  content: 'This is my content',
+  body: 'This is my content',
   account_sid: '...', # Twilio Credentials
   auth_token: '...'
 )
@@ -93,7 +93,7 @@ Twilito.send_sms!(to: '+15555555555', body: 'Foo')
 
 result = Twilito.send_sms(
   to: '+15555555555',
-  content: 'This is my content',
+  body: 'This is my content',
   media_url: 'https://example.com/image.png',
 )
 
@@ -107,7 +107,7 @@ result = Twilito.send_sms(
 
 result = Twilito.send_sms(
   to: '+15555555555',
-  content: 'This is my content',
+  body: 'This is my content',
   status_callback: 'https://your.app.io/sms/callback',
 )
 
