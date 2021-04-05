@@ -37,7 +37,7 @@ module Twilito
     def twilio_form_data(args)
       args
         .merge(auth_token: nil, account_sid: nil).compact
-        .transform_keys { |key| key.to_s.split('_').collect(&:capitalize).join }
+        .reduce({}) { |result, (k, v)| result.merge(k.to_s.split('_').collect(&:capitalize).join => v) }
     end
 
     def user_agent
