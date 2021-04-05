@@ -9,7 +9,7 @@ module Twilito
         req = Net::HTTP::Post.new(uri)
         req.initialize_http_header('User-Agent' => user_agent)
         req.basic_auth(args[:account_sid], args[:auth_token])
-        req.set_form_data(twilio_params(args))
+        req.set_form_data(twilio_form_data(args))
 
         http.request(req)
       end
@@ -31,14 +31,13 @@ module Twilito
 
     private
 
-    def twilio_params(args)
-      {
-        'To' => args[:to],
-        'From' => args[:from],
-        'Body' => args[:body],
-        'MediaUrl' => args[:media_url],
-        'StatusCallback' => args[:status_callback]
-      }.compact
+    # NOTE: Converts snake_cased hash of arguments to CamelCase to match Twilio
+    # API expectations. Also, removes auth_token and account_sid as those are
+    # included separately in .send_response as basic auth instead of POST body
+    def twilio_form_data(args)
+      args
+        .merge(auth_token: nil, account_sid: nil).compact
+        .transform_keys { |key| key.to_s.split('_').collect(&:capitalize).join }
     end
 
     def user_agent

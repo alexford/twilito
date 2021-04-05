@@ -16,6 +16,7 @@ describe Twilito do
   describe '.send_sms' do
     describe 'with a successful response from Twilio' do
       before do
+        # NOTE: See test_helper.rb
         stub_send_request(response_body: { sid: 'some_sid' })
       end
 
@@ -64,25 +65,7 @@ describe Twilito do
 
       describe 'with media_url passed' do
         it 'POSTs to Twilio API with correct body, overriding configuration' do
-          Twilito.send_sms(
-            body: 'A media SMS', to: '+17408675309', media_url: 'https://demo.twilio.com/owl.png'
-          )
-
-          assert_requested(
-            :post, 'https://api.twilio.com/2010-04-01/Accounts/ACSID/Messages.json',
-            body: {
-              To: '+17408675309',
-              From: '+16143333333',
-              Body: 'A media SMS',
-              MediaUrl: 'https://demo.twilio.com/owl.png'
-            }
-          )
-        end
-      end
-
-      describe 'with optional parameter passed' do
-        it 'POSTs to Twilio API with optional parameters' do
-          Twilito.send_sms(status_callback: 'https://abc1234.free.beeceptor.com')
+          Twilito.send_sms(media_url: 'https://demo.twilio.com/owl.png')
 
           assert_requested(
             :post, 'https://api.twilio.com/2010-04-01/Accounts/ACSID/Messages.json',
@@ -90,7 +73,24 @@ describe Twilito do
               To: '+16145555555',
               From: '+16143333333',
               Body: 'This is the body',
-              StatusCallback: 'https://abc1234.free.beeceptor.com'
+              MediaUrl: 'https://demo.twilio.com/owl.png'
+            }
+          )
+        end
+      end
+
+      describe 'with other arbitrary optional arguments passed' do
+        it 'POSTs to Twilio API with optional arguments CamelCased' do
+          Twilito.send_sms(status_callback: 'https://abc1234.free.beeceptor.com', foo_bar: 'baz')
+
+          assert_requested(
+            :post, 'https://api.twilio.com/2010-04-01/Accounts/ACSID/Messages.json',
+            body: {
+              To: '+16145555555',
+              From: '+16143333333',
+              Body: 'This is the body',
+              StatusCallback: 'https://abc1234.free.beeceptor.com',
+              FooBar: 'baz'
             }
           )
         end
