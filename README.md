@@ -1,6 +1,6 @@
 # Twilito
 
-A tiny, zero dependency helper for sending text messages with Twilio. Just enough of a wrapper to abstract away Twilio's REST API for sending messages, without _anything_ else.
+A tiny, zero dependency helper for sending text messages with Twilio. _Just enough_ of a wrapper to abstract away Twilio's REST API for sending messages, without _anything_ else.
 
 [![Gem Version](https://badge.fury.io/rb/twilito.svg)](https://badge.fury.io/rb/twilito) [![Actions Status](https://github.com/alexford/twilito/workflows/CI/badge.svg)](https://github.com/alexford/twilito/actions)
 
@@ -16,7 +16,7 @@ If you use more of Twilio, consider [twilio-ruby](https://github.com/twilio/twil
 
 ## Usage
 
-Twilito should work on Ruby 2.4 and up.
+Twilito should work on Ruby 2.4 and up. Unit tests [run in CI](https://github.com/alexford/twilito/actions) on 2.4, 2.5, 2.6, 2.7, and 3.0.
 
 #### Install the gem
 
@@ -27,7 +27,7 @@ gem 'twilito'
 #### Simplest case
 
 ```ruby
-# All of these arguments are required, but can be defaulted (see below)
+# All of these arguments are required, but can be configured as defaults (see below)
 result = Twilito.send_sms(
   to: '+15555555555',
   from: '+15554444444',
@@ -63,7 +63,9 @@ rescue Twilito::SendError => e
 end
 ```
 
-#### Every argument can be defaulted
+### Configuring Defaults For Required Arguments
+
+The five required arguments (`to`, `from`, `body`, `account_sid`, and `auth_token`) can be configured as defaults with `Twilito.configure`.
 
 ```ruby
 # In an initializer or something like that:
@@ -83,34 +85,21 @@ end
 Twilito.send_sms!(to: '+15555555555', body: 'Foo')
 ```
 
-**Everything can be defaulted, including the message body, so that a bare `Twilio.send_sms!` can work in your code**
+### Using Other, Optional (Arbitrary) Arguments
 
-#### Sending MMS
+There are a number of optional parameters defined by Twilio for sending a message (see [the API documentation](https://www.twilio.com/docs/sms/api/message-resource#create-a-message-resource)). Any of these can be sent with Twilito using the "Ruby-style" snake cased equivalent of the parameter.
 
 ```ruby
-# Use the optional media_url argument, which is sent
-# to Twilio as MediaUrl
+# Twilito sends arbitrary arguments to Twilio's API after CamelCasing keys to match Twilio's style.
+# NOTE: This example assumes auth_token, account_sid, and from have already been configured.
 
 result = Twilito.send_sms(
   to: '+15555555555',
   body: 'This is my content',
-  media_url: 'https://example.com/image.png',
+  media_url: 'https://example.com/image.png', # MediaUrl
+  status_callback: 'https://your.app.io/sms/callback', # StatusCallback
+  smart_encoded: true # SmartEncoded
 )
-
-```
-
-#### Set the optional `callback_url` argument if you want to receive HTTP callbacks from Twilio
-
-```ruby
-# Use the optional media_url argument, which is sent
-# to Twilio as MediaUrl
-
-result = Twilito.send_sms(
-  to: '+15555555555',
-  body: 'This is my content',
-  status_callback: 'https://your.app.io/sms/callback',
-)
-
 ```
 
 ## Testing your code
