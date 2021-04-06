@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    twilito (0.3.3)
+    twilito (0.4.0)
 
 GEM
   remote: https://rubygems.org/
