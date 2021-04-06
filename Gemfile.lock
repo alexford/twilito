@@ -6,13 +6,13 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.6.0)
-      public_suffix (>= 2.0.2, < 4.0)
+    addressable (2.7.0)
+      public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.1)
     coderay (1.1.2)
-    crack (0.4.3)
-      safe_yaml (~> 1.0.0)
-    hashdiff (0.3.8)
+    crack (0.4.5)
+      rexml
+    hashdiff (1.0.1)
     method_source (0.9.2)
     minitest (5.11.3)
     parallel (1.19.2)
@@ -21,7 +21,7 @@ GEM
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
-    public_suffix (3.0.3)
+    public_suffix (4.0.6)
     rainbow (3.0.0)
     rake (13.0.1)
     regexp_parser (1.7.1)
@@ -38,12 +38,11 @@ GEM
     rubocop-ast (0.0.3)
       parser (>= 2.7.0.1)
     ruby-progressbar (1.10.1)
-    safe_yaml (1.0.5)
     unicode-display_width (1.7.0)
-    webmock (3.5.1)
+    webmock (3.12.2)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
-      hashdiff
+      hashdiff (>= 0.4.0, < 2.0.0)
     yard (0.9.25)
 
 PLATFORMS
@@ -56,11 +55,11 @@ DEPENDENCIES
   rake (~> 13.0)
   rubocop
   twilito!
-  webmock (~> 3)
+  webmock (~> 3.12)
   yard (~> 0.9)
 
 RUBY VERSION
    ruby 2.7.2p137
 
 BUNDLED WITH
-   2.2.14
+   2.2.15
