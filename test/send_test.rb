@@ -23,6 +23,7 @@ describe Twilito do
       it 'returns a successful Twilito::Result' do
         result = Twilito.send_sms
 
+        # TODO: unit tests for Result?
         assert_instance_of Twilito::Result, result
         assert_equal 'some_sid', result.sid
         assert_equal true, result.success?
@@ -31,9 +32,6 @@ describe Twilito do
 
       it 'POSTs to Twilio API with correct body' do
         Twilito.send_sms
-
-        # TODO: test auth
-        # TODO: unit tests for Result?
 
         assert_requested(
           :post, 'https://api.twilio.com/2010-04-01/Accounts/ACSID/Messages.json',
