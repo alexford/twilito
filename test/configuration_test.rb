@@ -13,10 +13,10 @@ describe Twilito do
       Twilito.send_sms
     end
 
-    assert_match "to, from, body, account_sid, auth_token", error.message
+    assert_match "to, from (or messaging_service_sid), body, account_sid, auth_token", error.message
   end
 
-  it "does not require arguments for .send_sms once configured as defaults" do
+  it "does not include 'missing' arguments that are previously configured in the error message" do
     Twilito.configure do |config|
       config.body = 'foo'
     end
@@ -25,7 +25,7 @@ describe Twilito do
       Twilito.send_sms
     end
 
-    assert_match "to, from, account_sid, auth_token", error.message
+    assert_match "to, from (or messaging_service_sid), account_sid, auth_token", error.message
   end
 
   it "does not require any arguments for .send_sms if they're all configured" do
@@ -38,5 +38,32 @@ describe Twilito do
     end
 
     Twilito.send_sms
+  end
+
+  describe "either from OR messaging_service_sid is required" do
+    before do
+      Twilito.configure do |config|
+        config.to = '+16145555555'
+        config.body = 'foo'
+        config.account_sid = 'ACSID'
+        config.auth_token = 'TOKEN'
+      end
+    end
+
+    it "does not require `from` for .send_sms if `messaging_service_sid` is provided" do
+      Twilito.configure do |config|
+        config.messaging_service_sid = 'MSSID'
+      end
+
+      Twilito.send_sms
+    end
+
+    it "does not require `messaging_service_sid` for .send_sms if `from` is provided" do
+      Twilito.configure do |config|
+        config.from = '+16144444444'
+      end
+
+      Twilito.send_sms
+    end
   end
 end
