@@ -38,6 +38,13 @@ module Twilito
       configuration.to_h.merge(args).tap do |merged|
         missing_keys = merged.select { |_k, v| v.nil? }.keys
 
+        # Only one of :from or :messaging_service_sid must be set
+        missing_keys = [] if (missing_keys == [:from]) || (missing_keys == [:messaging_service_sid])
+        missing_keys = missing_keys.map do |key|
+          key == :from ? "from (or messaging_service_sid)" : key
+        end
+        missing_keys.delete(:messaging_service_sid)
+
         raise ArgumentError, "Missing argument(s): #{missing_keys.join(', ')}" if missing_keys.any?
       end
     end

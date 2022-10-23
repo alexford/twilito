@@ -4,6 +4,7 @@ require "test_helper"
 
 describe Twilito do
   before do
+    Twilito.reset_configuration!
     Twilito.configure do |config|
       config.to = '+16145555555'
       config.from = '+16143333333'
