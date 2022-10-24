@@ -30,7 +30,7 @@ gem 'twilito'
 # All of these arguments are required, but can be configured as defaults (see below)
 result = Twilito.send_sms(
   to: '+15555555555',
-  from: '+15554444444',
+  from: '+15554444444', # or 'messaging_service_sid'
   body: 'This is my content',
   account_sid: '...', # Twilio Credentials
   auth_token: '...'
@@ -58,14 +58,14 @@ begin
     auth_token: '...'
   )
 rescue Twilito::SendError => e
-  e.message # => 'Error from Twilio API'
+  e.message # => 'The error message from Twilio API'
   e.response # => Raw response (instance of Net::HTTPResponse)
 end
 ```
 
 ### Configuring Defaults For Required Arguments
 
-The five required arguments (`to`, `from`, `body`, `account_sid`, and `auth_token`) can be configured as defaults with `Twilito.configure`.
+The five required arguments (`to`, `from` (or `messaging_service_sid`), `body`, `account_sid`, and `auth_token`) can be configured as defaults with `Twilito.configure`.
 
 ```ruby
 # In an initializer or something like that:
