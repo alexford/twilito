@@ -58,7 +58,7 @@ begin
     auth_token: '...'
   )
 rescue Twilito::SendError => e
-  e.message # => 'The error message from Twilio API'
+  e.message # => 'Error from Twilio API'
   e.response # => Raw response (instance of Net::HTTPResponse)
 end
 ```
