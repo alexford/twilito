@@ -16,7 +16,7 @@ If you use more of Twilio, consider [twilio-ruby](https://github.com/twilio/twil
 
 ## Usage
 
-Twilito should work on Ruby 2.4 and up. Unit tests [run in CI](https://github.com/alexford/twilito/actions) on 2.4, 2.5, 2.6, 2.7, 3.0, and 3.1.
+Twilito is designed for currently maintained Ruby versions. (3.0 and up as of 8/2023). Unit tests [run in CI](https://github.com/alexford/twilito/actions) on 3.0, 3.1, and 3.2
 
 #### Install the gem
 
