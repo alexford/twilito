@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    twilito (0.4.0)
+    twilito (0.5.0)
 
 GEM
   remote: https://rubygems.org/
@@ -53,7 +53,7 @@ DEPENDENCIES
   minitest (~> 5.11)
   pry (~> 0.14)
   rake (~> 13.0)
-  rubocop
+  rubocop (~> 0.85)
   twilito!
   webmock (~> 3.12)
   yard (~> 0.9)
