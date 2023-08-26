@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.version       = Twilito::VERSION
   spec.authors       = ["Alex Ford"]
   spec.email         = ["alexford@hey.com"]
-  spec.required_ruby_version = '>= 2.4.0'
+  spec.required_ruby_version = '>= 3.0'
 
   spec.summary       = "A tiny, zero dependency, and easy to test helper for sending text messages with Twilio"
   spec.homepage      = "https://github.com/alexford/twilito"
@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "minitest", "~> 5.11"
-  spec.add_development_dependency "pry"
+  spec.add_development_dependency "pry", "~> 0.14"
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rubocop"
   spec.add_development_dependency "webmock", "~> 3.12"
