@@ -23,10 +23,11 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 2.0"
-  spec.add_development_dependency "minitest", "~> 5.11"
-  spec.add_development_dependency "pry", "~> 0.14"
-  spec.add_development_dependency "rake", "~> 13.0"
+  spec.add_development_dependency "minitest", "~> 5.25"
+  spec.add_development_dependency "pry", "~> 0.15"
+  spec.add_development_dependency "rake", "~> 13.2"
   spec.add_development_dependency "rubocop", "~> 0.85"
-  spec.add_development_dependency "webmock", "~> 3.12"
+  spec.add_development_dependency "webmock", "~> 3.24"
+  spec.add_development_dependency "crack", "~> 1.0"
   spec.add_development_dependency "yard", "~> 0.9"
 end
