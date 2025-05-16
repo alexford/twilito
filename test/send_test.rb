@@ -113,6 +113,36 @@ describe Twilito do
   end
 
   describe '.send_sms!' do
+    describe 'with a successful response from Twilio' do
+      before do
+        # NOTE: See test_helper.rb
+        stub_send_request(response_body: { sid: 'some_sid_from_bang' })
+      end
+
+      it 'returns a successful Twilito::Result' do
+        result = Twilito.send_sms! # Configuration provides other params
+
+        assert_instance_of Twilito::Result, result
+        assert_equal true, result.success?
+        assert_equal 'some_sid_from_bang', result.sid
+        assert_equal [], result.errors
+      end
+
+      describe 'with a successful response from Twilio but with malformed JSON' do
+        before do
+          stub_send_request(response_body: 'this is not json')
+        end
+
+        it 'raises a Twilito::SendError' do
+          error = assert_raises Twilito::SendError do
+            Twilito.send_sms!
+          end
+
+          assert_equal 'Unable to parse response from Twilio API. Error: unexpected token at \'this is not json\'', error.message
+        end
+      end
+    end
+
     describe 'with an unsuccessful response from Twilio' do
       before do
         stub_send_request(status: 500, response_body: 'oh no')
