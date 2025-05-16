@@ -13,23 +13,22 @@ module Twilito
     include API
 
     def send_sms(**args)
-      response = send_sms!(**args)
-      Result.success(
-        response: response,
-        sid: JSON.parse(response.read_body)['sid']
-      )
+      send_sms!(**args)
     rescue SendError => e
       Result.failure(errors: [e.message], response: e.response)
-    rescue JSON::ParserError
-      Result.failure(errors: ['Unable to parse response'], response: response)
     end
 
     def send_sms!(**args)
       args = merge_configuration(args)
+      response = send_response(args)
 
-      send_response(args).tap do |response|
-        raise SendError.new('Error from Twilio API', response) unless response.is_a? Net::HTTPSuccess
+      unless response.is_a? Net::HTTPSuccess
+        raise SendError.new('Error from Twilio API', response)
       end
+
+      Result.success(response: response, sid: JSON.parse(response.body)['sid'])
+    rescue JSON::ParserError => e
+      raise SendError.new("Unable to parse response from Twilio API. Error: #{e.message}", response)
     end
 
     private
