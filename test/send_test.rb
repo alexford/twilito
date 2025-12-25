@@ -24,7 +24,6 @@ describe Twilito do
       it 'returns a successful Twilito::Result' do
         result = Twilito.send_sms
 
-        # TODO: unit tests for Result?
         assert_instance_of Twilito::Result, result
         assert_equal 'some_sid', result.sid
         assert_equal true, result.success?
