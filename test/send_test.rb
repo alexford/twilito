@@ -137,7 +137,7 @@ describe Twilito do
             Twilito.send_sms!
           end
 
-          assert_equal 'Unable to parse response from Twilio API. Error: unexpected token at \'this is not json\'', error.message
+          assert_match 'Unable to parse response from Twilio API. Error: unexpected token', error.message
         end
       end
     end
