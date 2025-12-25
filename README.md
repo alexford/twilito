@@ -16,7 +16,7 @@ If you use more of Twilio, consider [twilio-ruby](https://github.com/twilio/twil
 
 ## Usage
 
-Twilito is designed for currently maintained Ruby versions. (3.1 and up as of 12/2024). Unit tests [run in CI](https://github.com/alexford/twilito/actions) on 3.1, 3.2, 3.3, and 3.4
+Twilito is designed for currently maintained Ruby versions. (3.2 and up as of 12/2025). Unit tests [run in CI](https://github.com/alexford/twilito/actions) on 3.2, 3.3, and 3.4
 
 #### Install the gem
 
